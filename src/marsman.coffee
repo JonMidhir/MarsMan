@@ -1,7 +1,7 @@
 class GameWorld
 	constructor: (@canvas) ->
 		@then = null
-		@factories = []
+		@mounds = []
 		@oxygen = 0
 		
 	render: () ->
@@ -23,31 +23,23 @@ class GameWorld
 		callback = @main.bind(@)
 		setInterval(callback, 1)
 		
-	add: (object) ->
-		@canvas.ctx.fillStyle = object.color
-		@canvas.ctx.fillRect object.x, object.y, object.width, object.height
-		@factories.push object #shouldn't do this really, doesn't know object is a factory
-		
-
-class Factory
-	constructor: (@x,@y) ->
-		@height = 10
-		@width = 10
-		@color = '#00f'
-		@oxygen = 10 #oxygen generated per second
-		
+	add: (object) -> 
+		console.log "Add something"
+		@canvas.div.prepend(object.world_reference)
+		object.world_reference.box2d(object.physics)
 
 $(document).ready ->
 	canvas = {
-		div: $('#canvas')
-		height: $('#canvas').height()
-		width: $('#canvas').width()
-		ctx: $('#canvas').get(0).getContext("2d");
+		div: $('#world')
+		height: $('#world').height()
+		width: $('#world').width()
 	}
 	
 	gameWorld = new GameWorld(canvas)
 	gameWorld.run()
 	
 	canvas.div.live 'click', (e) ->
-		factory = new Factory(e.pageX, e.pageY)
-		gameWorld.add(factory)
+		mound = new Mound(e.pageX, e.pageY)
+		gameWorld.add(mound)
+  
+	$("#floor").box2d({'x-velocity': -10, 'y-velocity': 10, 'static': true})
