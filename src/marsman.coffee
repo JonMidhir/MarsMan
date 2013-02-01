@@ -7,7 +7,6 @@ class GameWorld
 	render: () ->
 		
 	update: (modifier) ->
-		console.log "Modifier: #{modifier}, Oxygen: #{@oxygen}"
 		
 	main: () ->
 		now = Date.now()
