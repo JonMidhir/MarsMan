@@ -5,6 +5,6 @@ class Mound
 		@color = '#f00'
 		@oxygen = 10 #oxygen generated per second
 		@world_reference = @world_constructor()
-		@physics = {'y-velocity': 10}
+		@physics = {'y-velocity': 100}
 		
 	world_constructor: () -> $('<div class="mound"></div>')

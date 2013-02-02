@@ -24,7 +24,6 @@ class GameWorld
 		setInterval(callback, 1)
 		
 	add: (object) -> 
-		console.log "Add something"
 		@canvas.div.prepend(object.world_reference)
 		object.world_reference.box2d(object.physics)
 
@@ -41,5 +40,11 @@ $(document).ready ->
 	canvas.div.live 'click', (e) ->
 		mound = new Mound(e.pageX, e.pageY)
 		gameWorld.add(mound)
+		
+	buggy = new Buggy()
+	gameWorld.add(buggy)
+	
+	$('body').keypress ->
+		console.log ">"
   
 	$("#floor").box2d({'x-velocity': -10, 'y-velocity': 10, 'static': true})
